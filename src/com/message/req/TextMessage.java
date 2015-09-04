@@ -1,4 +1,4 @@
-package com.req;
+package com.message.req;
 
 /**
  * 文本消息类

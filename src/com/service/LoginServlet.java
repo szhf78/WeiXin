@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.crypto.Data;
 
-import com.req.TextMessage;
+import com.message.req.TextMessage;
 import com.util.MessageUtil;
 import com.util.ValidationUtil;
 

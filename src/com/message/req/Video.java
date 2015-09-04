@@ -1,4 +1,4 @@
-package com.req;
+package com.message.req;
 
 /**
  * 视频实体类
@@ -8,6 +8,5 @@ package com.req;
  *
  */
 public class Video {
-	private String Copy;
-	private String Copys;
+	
 }

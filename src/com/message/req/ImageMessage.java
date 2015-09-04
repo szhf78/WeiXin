@@ -1,4 +1,4 @@
-package com.req;
+package com.message.req;
 
 /**
  * Í¼Æ¬ÏûÏ¢Àà

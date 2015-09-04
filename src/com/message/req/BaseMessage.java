@@ -1,4 +1,4 @@
-package com.req;
+package com.message.req;
 
 /**
  * 基础消息类
