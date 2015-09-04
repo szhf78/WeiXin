@@ -9,4 +9,5 @@ package com.req;
  */
 public class Video {
 	private String Copy;
+	private String Copys;
 }
