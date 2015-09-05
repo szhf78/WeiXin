@@ -1,4 +1,4 @@
-package com.message.req;
+package com.message.resp;
 
 /**
  * 视频实体类
