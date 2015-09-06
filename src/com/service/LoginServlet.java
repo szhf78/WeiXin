@@ -15,7 +15,7 @@ import com.util.MessageUtil;
 import com.util.ValidationUtil;
 
 /**
- * Î¢ĞÅÇëÇóÑéÖ¤
+ * å¾®ä¿¡è¯·æ±‚éªŒè¯
  * 
  * @author Franco.Han
  * @date 2015-9-3
@@ -25,28 +25,28 @@ public class LoginServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("getÇëÇó¡£¡£¡£");
+		System.out.println("getè¯·æ±‚ã€‚ã€‚ã€‚");
 
-		// 1,»ñµÃÎ¢ĞÅÇ©ÃûµÄ¼ÓÃÜ×Ö·û´®
+		// 1,è·å¾—å¾®ä¿¡ç­¾åçš„åŠ å¯†å­—ç¬¦ä¸²
 		String signature = request.getParameter("signature");
 
-		// 2,»ñµÃÊ±¼ä´Á
+		// 2,è·å¾—æ—¶é—´æˆ³
 		String timestamp = request.getParameter("timestamp");
 
-		// 3,»ñµÃËæ»úÊı
+		// 3,è·å¾—éšæœºæ•°
 		String nonce = request.getParameter("nonce");
 
-		// 4,»ñµÃËæ»ú×Ö·û´®
+		// 4,è·å¾—éšæœºå­—ç¬¦ä¸²
 		String echostr = request.getParameter("echostr");
 
-		System.out.println("»ñµÃÎ¢ĞÅÇ©ÃûµÄ¼ÓÃÜ×Ö·û´®=" + signature);
-		System.out.println("»ñµÃÊ±¼ä´Á=" + timestamp);
-		System.out.println("»ñµÃËæ»úÊı=" + nonce);
-		System.out.println("»ñµÃËæ»ú×Ö·û´®=" + echostr);
+		System.out.println("è·å¾—å¾®ä¿¡ç­¾åçš„åŠ å¯†å­—ç¬¦ä¸²=" + signature);
+		System.out.println("è·å¾—æ—¶é—´æˆ³=" + timestamp);
+		System.out.println("è·å¾—éšæœºæ•°=" + nonce);
+		System.out.println("è·å¾—éšæœºå­—ç¬¦ä¸²=" + echostr);
 
 		PrintWriter out = response.getWriter();
 
-		// ÑéÖ¤ÇëÇóÈ·ÈÏ³É¹¦Ô­Ñù·µ»Øechostr²ÎÊıÄÚÈİ£¬Ôò½ÓÈëÉúĞ§£¬³ÉÎª¿ª·¢Õß³É¹¦£¬·ñÔò½ÓÈëÊ§°Ü
+		// éªŒè¯è¯·æ±‚ç¡®è®¤æˆåŠŸåŸæ ·è¿”å›echostrå‚æ•°å†…å®¹ï¼Œåˆ™æ¥å…¥ç”Ÿæ•ˆï¼Œæˆä¸ºå¼€å‘è€…æˆåŠŸï¼Œå¦åˆ™æ¥å…¥å¤±è´¥
 		if (ValidationUtil.checkSignature(signature, timestamp, nonce)) {
 			out.print(echostr);
 		}
@@ -56,30 +56,30 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	/**
-	 * ½ÓÊÕÎ¢ĞÅ·şÎñÆ÷·¢¹ıÀ´µÄXMLÊı¾İ°ü£¨Í¨¹ıpostÇëÇó·¢ËÍ¹ıÀ´µÄ£©
+	 * æ¥æ”¶å¾®ä¿¡æœåŠ¡å™¨å‘è¿‡æ¥çš„XMLæ•°æ®åŒ…ï¼ˆé€šè¿‡postè¯·æ±‚å‘é€è¿‡æ¥çš„ï¼‰
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String respXml="";//ÒªÏìÓ¦µÄXML´®
+		String respXml="";//è¦å“åº”çš„XMLä¸²
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
-		// 1,»ñµÃÎ¢ĞÅÇ©ÃûµÄ¼ÓÃÜ×Ö·û´®
+		// 1,è·å¾—å¾®ä¿¡ç­¾åçš„åŠ å¯†å­—ç¬¦ä¸²
 		String signature = request.getParameter("signature");
 
-		// 2,»ñµÃÊ±¼ä´Á
+		// 2,è·å¾—æ—¶é—´æˆ³
 		String timestamp = request.getParameter("timestamp");
 
-		// 3,»ñµÃËæ»úÊı
+		// 3,è·å¾—éšæœºæ•°
 		String nonce = request.getParameter("nonce");
 		
 		PrintWriter out = response.getWriter();
 
-		// ÑéÖ¤ÇëÇóÈ·ÈÏ³É¹¦Ô­Ñù·µ»Øechostr²ÎÊıÄÚÈİ£¬Ôò½ÓÈëÉúĞ§£¬³ÉÎª¿ª·¢Õß³É¹¦£¬·ñÔò½ÓÈëÊ§°Ü
+		// éªŒè¯è¯·æ±‚ç¡®è®¤æˆåŠŸåŸæ ·è¿”å›echostrå‚æ•°å†…å®¹ï¼Œåˆ™æ¥å…¥ç”Ÿæ•ˆï¼Œæˆä¸ºå¼€å‘è€…æˆåŠŸï¼Œå¦åˆ™æ¥å…¥å¤±è´¥
 		if (ValidationUtil.checkSignature(signature, timestamp, nonce)) {
 			
-			//½ÓÊÕ²¢½âÎöÀ´×ÔÓÃ»§µÄXMLÊı¾İ°üÖĞµÄÄÚÈİ
+			//æ¥æ”¶å¹¶è§£ææ¥è‡ªç”¨æˆ·çš„XMLæ•°æ®åŒ…ä¸­çš„å†…å®¹
 			Map<String, String> reqMap = null;
 			try {
 				reqMap = MessageUtil.parseXml(request);
@@ -93,11 +93,11 @@ public class LoginServlet extends HttpServlet {
 			String MsgType=reqMap.get("MsgType");
 			String Content=reqMap.get("Content");
 			
-			//¿ªÊ¼ÏìÓ¦ÏûÏ¢¸øÓÃ»§
+			//å¼€å§‹å“åº”æ¶ˆæ¯ç»™ç”¨æˆ·
 			
-			String respContent="";//ÒªÏìÓ¦µÄÎÄ±¾ÄÚÈİ
+			String respContent="";//è¦å“åº”çš„æ–‡æœ¬å†…å®¹
 			
-			//¹¹½¨Ò»ÌõÎÄ±¾ÏûÏ¢
+			//æ„å»ºä¸€æ¡æ–‡æœ¬æ¶ˆæ¯
 			TextMessage textMsg=new TextMessage();
 			textMsg.setToUserName(FromUserName);
 			textMsg.setFromUserName(ToUserName);
@@ -105,7 +105,7 @@ public class LoginServlet extends HttpServlet {
 			textMsg.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
 			
 			if(MsgType.equals(MessageUtil.RESP_MESSAGE_TYPE_TEXT)){
-				respContent="»¶Ó­À´µ½µØÓüÌìÌÃ";
+				respContent="æ¬¢è¿æ¥åˆ°åœ°ç‹±å¤©å ‚";
 			}
 			textMsg.setContent(respContent);
 			
@@ -115,7 +115,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		out.close();
-		//out=null;
+		out=null;
 	
 	}
 

@@ -1,16 +1,16 @@
 package com.message.resp;
 
 /**
- * Í¼Æ¬ÊµÌåÀà
+ * å›¾ç‰‡å®ä½“ç±»
  * @author Franco.Han
  * @date 2015-9-4
  * @version 1.0
  *
  */
 public class Image{
-	private String PicUrl;//Í¼Æ¬Á´½Ó
-	private String MediaId;//Í¼Æ¬ÏûÏ¢Ã½Ìåid£¬¿ÉÒÔµ÷ÓÃ¶àÃ½ÌåÎÄ¼şÏÂÔØ½Ó¿ÚÀ­È¡Êı¾İ¡£
-	private String MsgId;//ÏûÏ¢id£¬64Î»ÕûĞÍ
+	private String PicUrl;//å›¾ç‰‡é“¾æ¥
+	private String MediaId;//å›¾ç‰‡æ¶ˆæ¯åª’ä½“idï¼Œå¯ä»¥è°ƒç”¨å¤šåª’ä½“æ–‡ä»¶ä¸‹è½½æ¥å£æ‹‰å–æ•°æ®ã€‚
+	private String MsgId;//æ¶ˆæ¯idï¼Œ64ä½æ•´å‹
 	public String getPicUrl() {
 		return PicUrl;
 	}

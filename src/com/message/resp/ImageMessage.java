@@ -1,14 +1,14 @@
 package com.message.resp;
 
 /**
- * Í¼Æ¬ÏûÏ¢Àà
+ * å›¾ç‰‡æ¶ˆæ¯ç±»
  * @author Franco.Han
  * @date 2015-9-4
  * @version 1.0
  *
  */
 public class ImageMessage extends BaseMessage {
-	//Í¼Æ¬¶ÔÏó
+	//å›¾ç‰‡å¯¹è±¡
 	private Image image;
 
 	public Image getImage() {

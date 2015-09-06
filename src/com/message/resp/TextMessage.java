@@ -1,7 +1,7 @@
 package com.message.resp;
 
 /**
- * ÎÄ±¾ÏûÏ¢Àà
+ * æ–‡æœ¬æ¶ˆæ¯ç±»
  * @author Franco.Han
  * @date 2015-9-3
  * @version 1.0
@@ -9,8 +9,8 @@ package com.message.resp;
  */
 public class TextMessage extends BaseMessage {
 	
-	private String Content;//ÎÄ±¾ÏûÏ¢ÄÚÈİ
-	private String MsgId;//ÏûÏ¢id£¬64Î»ÕûĞÍ
+	private String Content;//æ–‡æœ¬æ¶ˆæ¯å†…å®¹
+	private String MsgId;//æ¶ˆæ¯idï¼Œ64ä½æ•´å‹
 	
 	public String getContent() {
 		return Content;

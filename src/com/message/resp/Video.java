@@ -1,7 +1,7 @@
 package com.message.resp;
 
 /**
- * ÊÓÆµÊµÌåÀà
+ * è§†é¢‘å®ä½“ç±»
  * @author Franco.Han
  * @date 2015-9-4
  * @version 1.0

@@ -1,7 +1,7 @@
 package com.message.resp;
 
 /**
- * »ù´¡ÏûÏ¢Àà
+ * åŸºç¡€æ¶ˆæ¯ç±»
  * @author Franco.Han
  * @date 2015-9-3
  * @version 1.0
@@ -9,10 +9,10 @@ package com.message.resp;
  */
 public class BaseMessage {
 	
-	private String ToUserName;//¿ª·¢ÕßÎ¢ĞÅºÅ ½ÓÊÕ·½
-	private String FromUserName;//·¢ËÍ·½ÕÊºÅ£¨Ò»¸öOpenID£©
-	private long CreateTime;//ÏûÏ¢´´½¨Ê±¼ä £¨ÕûĞÍ£©
-	private String MsgType;//ÏûÏ¢ÀàĞÍ
+	private String ToUserName;//å¼€å‘è€…å¾®ä¿¡å· æ¥æ”¶æ–¹
+	private String FromUserName;//å‘é€æ–¹å¸å·ï¼ˆä¸€ä¸ªOpenIDï¼‰
+	private long CreateTime;//æ¶ˆæ¯åˆ›å»ºæ—¶é—´ ï¼ˆæ•´å‹ï¼‰
+	private String MsgType;//æ¶ˆæ¯ç±»å‹
 	
 	public String getToUserName() {
 		return ToUserName;

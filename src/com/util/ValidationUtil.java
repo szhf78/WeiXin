@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * 
- * Î¢ĞÅÇëÇóĞ£Ñé¹¤¾ßÀà
+ * å¾®ä¿¡è¯·æ±‚æ ¡éªŒå·¥å…·ç±»
  * 
  * @author Franco.Han
  * @date 2015-9-3
@@ -14,11 +14,11 @@ import java.util.Arrays;
  * 
  */
 public class ValidationUtil {
-	// Óë½Ó¿ÚÅäÖÃĞÅÏ¢ÖĞµÄTokenÒªÒ»ÖÂ
+	// ä¸æ¥å£é…ç½®ä¿¡æ¯ä¸­çš„Tokenè¦ä¸€è‡´
 	private static String token = "szhf1978";
 
 	/**
-	 * ÑéÖ¤Ç©Ãû
+	 * éªŒè¯ç­¾å
 	 * 
 	 * @param signature
 	 * @param timestamp
@@ -28,7 +28,7 @@ public class ValidationUtil {
 	public static boolean checkSignature(String signature, String timestamp,
 			String nonce) {
 		String[] arr = new String[] { token, timestamp, nonce };
-		// ½«token¡¢timestamp¡¢nonceÈı¸ö²ÎÊı½øĞĞ×ÖµäĞòÅÅĞò
+		// å°†tokenã€timestampã€nonceä¸‰ä¸ªå‚æ•°è¿›è¡Œå­—å…¸åºæ’åº
 		Arrays.sort(arr);
 		StringBuilder content = new StringBuilder();
 		for (int i = 0; i < arr.length; i++) {
@@ -39,7 +39,7 @@ public class ValidationUtil {
 
 		try {
 			md = MessageDigest.getInstance("SHA-1");
-			// ½«Èı¸ö²ÎÊı×Ö·û´®Æ´½Ó³ÉÒ»¸ö×Ö·û´®½øĞĞsha1¼ÓÃÜ
+			// å°†ä¸‰ä¸ªå‚æ•°å­—ç¬¦ä¸²æ‹¼æ¥æˆä¸€ä¸ªå­—ç¬¦ä¸²è¿›è¡Œsha1åŠ å¯†
 			byte[] digest = md.digest(content.toString().getBytes());
 			tmpStr = byteToStr(digest);
 		} catch (NoSuchAlgorithmException e) {
@@ -47,12 +47,12 @@ public class ValidationUtil {
 		}
 
 		content = null;
-		// ½«sha1¼ÓÃÜºóµÄ×Ö·û´®¿ÉÓësignature¶Ô±È£¬±êÊ¶¸ÃÇëÇóÀ´Ô´ÓÚÎ¢ĞÅ
+		// å°†sha1åŠ å¯†åçš„å­—ç¬¦ä¸²å¯ä¸signatureå¯¹æ¯”ï¼Œæ ‡è¯†è¯¥è¯·æ±‚æ¥æºäºå¾®ä¿¡
 		return tmpStr != null ? tmpStr.equals(signature.toUpperCase()) : false;
 	}
 
 	/**
-	 * ½«×Ö½ÚÊı×é×ª»»ÎªÊ®Áù½øÖÆ×Ö·û´®
+	 * å°†å­—èŠ‚æ•°ç»„è½¬æ¢ä¸ºåå…­è¿›åˆ¶å­—ç¬¦ä¸²
 	 * 
 	 * @param byteArray
 	 * @return
@@ -66,7 +66,7 @@ public class ValidationUtil {
 	}
 
 	/**
-	 * ½«×Ö½Ú×ª»»ÎªÊ®Áù½øÖÆ×Ö·û´®
+	 * å°†å­—èŠ‚è½¬æ¢ä¸ºåå…­è¿›åˆ¶å­—ç¬¦ä¸²
 	 * 
 	 * @param mByte
 	 * @return
