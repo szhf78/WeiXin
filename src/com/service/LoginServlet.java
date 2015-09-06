@@ -80,7 +80,13 @@ public class LoginServlet extends HttpServlet {
 		if (ValidationUtil.checkSignature(signature, timestamp, nonce)) {
 			
 			//接收并解析来自用户的XML数据包中的内容
-			Map<String,String> reqMap=MessageUtil.parseXml(request);
+			Map<String, String> reqMap = null;
+			try {
+				reqMap = MessageUtil.parseXml(request);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			String ToUserName=reqMap.get("ToUserName");
 			String FromUserName=reqMap.get("FromUserName");
@@ -103,14 +109,14 @@ public class LoginServlet extends HttpServlet {
 			}
 			textMsg.setContent(respContent);
 			
-			respXml =MessageUtil.messageToXml(textMsg);
+			respXml =MessageUtil.textMessageToXml(textMsg);
 			System.out.println("respXml="+respXml);
 			out.print(respXml);
 		}
-
-		out.close();
-		out=null;
 		
+		out.close();
+		//out=null;
+	
 	}
 
 }

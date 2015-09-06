@@ -8,9 +8,5 @@ package com.message.resp;
  *
  */
 public class Video {
-<<<<<<< HEAD:src/com/message/resp/Video.java
 	
-=======
-	private String Copy;
->>>>>>> origin/master:src/com/req/Video.java
 }

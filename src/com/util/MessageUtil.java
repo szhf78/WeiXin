@@ -1,6 +1,5 @@
 package com.util;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.HashMap;
@@ -10,7 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -31,54 +29,152 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
  */
 public class MessageUtil {
 
-	// 定义了消息类型（）
+	/**
+	 * 返回消息类型：文本
+	 */
 	public static final String RESP_MESSAGE_TYPE_TEXT = "text";
 
 	/**
-	 * 从流中解析出每个节点的内容
+	 * 返回消息类型：音乐
+	 */
+	public static final String RESP_MESSAGE_TYPE_MUSIC = "music";
+
+	/**
+	 * 返回消息类型：图文
+	 */
+	public static final String RESP_MESSAGE_TYPE_NEWS = "news";
+
+	/**
+	 * 请求消息类型：文本
+	 */
+	public static final String REQ_MESSAGE_TYPE_TEXT = "text";
+
+	/**
+	 * 请求消息类型：图片
+	 */
+	public static final String REQ_MESSAGE_TYPE_IMAGE = "image";
+
+	/**
+	 * 请求消息类型：链接
+	 */
+	public static final String REQ_MESSAGE_TYPE_LINK = "link";
+
+	/**
+	 * 请求消息类型：地理位置
+	 */
+	public static final String REQ_MESSAGE_TYPE_LOCATION = "location";
+	
+	
+	/**
+	 * 请求消息类型：视频
+	 */
+	public static final String REQ_MESSAGE_TYPE_VIDEO = "video";
+	
+
+	/**
+	 * 请求消息类型：音频
+	 */
+	public static final String REQ_MESSAGE_TYPE_VOICE = "voice";
+
+	/**
+	 * 请求消息类型：推送
+	 */
+	public static final String REQ_MESSAGE_TYPE_EVENT = "event";
+
+	/**
+	 * 事件类型：subscribe(订阅)
+	 */
+	public static final String EVENT_TYPE_SUBSCRIBE = "subscribe";
+
+	/**
+	 * 事件类型：unsubscribe(取消订阅)
+	 */
+	public static final String EVENT_TYPE_UNSUBSCRIBE = "unsubscribe";
+
+	/**
+	 * 事件类型：CLICK(自定义菜单点击事件)
+	 */
+	public static final String EVENT_TYPE_CLICK = "CLICK";
+
+	/**
+	 * 解析微信发来的请求（XML）
 	 * 
 	 * @param request
 	 * @return
-	 * @throws IOException
+	 * @throws Exception
 	 */
-	public static Map<String, String> parseXml(HttpServletRequest request)
-			throws IOException {
-
+	@SuppressWarnings("unchecked")
+	public static Map<String, String> parseXml(HttpServletRequest request) throws Exception {
+		// 将解析结果存储在HashMap中
 		Map<String, String> map = new HashMap<String, String>();
 
-		// 从输入流中获取流对象
-		InputStream in = request.getInputStream();
-
-		// 构建SAX阅读器对象
+		// 从request中取得输入流
+		InputStream inputStream = request.getInputStream();
+		// 读取输入流
 		SAXReader reader = new SAXReader();
+		Document document = reader.read(inputStream);
+		// 得到xml根元素
+		Element root = document.getRootElement();
+		// 得到根元素的所有子节点
+		List<Element> elementList = root.elements();
 
-		try {
-			// 从流中获得文档对象
-			Document doc = reader.read(in);
-			// 获得根节点
-			Element root = doc.getRootElement();
-			// 获取根节点下的所有子节点
-			List<Element> children = root.elements();
+		// 遍历所有子节点
+		for (Element e : elementList)
+			map.put(e.getName(), e.getText());
 
-			for (Element e : children) {
-				// 循环遍历每一个节点，并按照节点名－节点值放入map中
-				map.put(e.getName(), e.getText());
-			}
-			in.close();
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		}
+		// 释放资源
+		inputStream.close();
+		inputStream = null;
+
 		return map;
 	}
 
 	/**
-	 * 用于扩展节点数据按照<ToUserName><![CDATA[toUser]]></ToUserName>,中间加了CDATA
+	 * 文本消息对象转换成xml
+	 * 
+	 * @param textMessage 文本消息对象
+	 * @return xml
+	 */
+	public static String textMessageToXml(TextMessage textMessage) {
+		xstream.alias("xml", textMessage.getClass());
+		return xstream.toXML(textMessage);
+	}
+
+	/**
+	 * 音乐消息对象转换成xml
+	 * 
+	 * @param musicMessage 音乐消息对象
+	 * @return xml
+	 */
+	/*public static String musicMessageToXml(MusicMessage musicMessage) {
+		xstream.alias("xml", musicMessage.getClass());
+		return xstream.toXML(musicMessage);
+	}*/
+
+	/**
+	 * 图文消息对象转换成xml
+	 * 
+	 * @param newsMessage 图文消息对象
+	 * @return xml
+	 */
+	/*public static String newsMessageToXml(NewsMessage newsMessage) {
+		xstream.alias("xml", newsMessage.getClass());
+		xstream.alias("item", new Article().getClass());
+		return xstream.toXML(newsMessage);
+	}*/
+
+	/**
+	 * 扩展xstream，使其支持CDATA块
+	 * 
+	 * @date 2013-05-19
 	 */
 	private static XStream xstream = new XStream(new XppDriver() {
 		public HierarchicalStreamWriter createWriter(Writer out) {
 			return new PrettyPrintWriter(out) {
+				// 对所有xml节点的转换都增加CDATA标记
 				boolean cdata = true;
 
+				@SuppressWarnings("unchecked")
 				public void startNode(String name, Class clazz) {
 					super.startNode(name, clazz);
 				}
@@ -87,7 +183,7 @@ public class MessageUtil {
 					if (cdata) {
 						writer.write("<![CDATA[");
 						writer.write(text);
-						writer.write("]]");
+						writer.write("]]>");
 					} else {
 						writer.write(text);
 					}
@@ -95,15 +191,4 @@ public class MessageUtil {
 			};
 		}
 	});
-	
-	/**
-	 * 将文本消息转换成XML格式
-	 * @param textMessage
-	 * @return
-	 */
-	public static String messageToXml(TextMessage textMessage){
-		xstream.alias("xml", textMessage.getClass());
-		
-		return xstream.toXML(textMessage);
-	}
 }
