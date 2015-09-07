@@ -1,5 +1,6 @@
 package com.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.message.requ.TextMessage;
+import com.message.resp.TextRespMsg;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
@@ -33,6 +34,12 @@ public class MessageUtil {
 	 * 返回消息类型：文本
 	 */
 	public static final String RESP_MESSAGE_TYPE_TEXT = "text";
+	
+	/**
+	 * 返回消息类型：图片
+	 */
+	public static final String RESP_MESSAGE_TYPE_IMAGE = "image";
+	
 
 	/**
 	 * 返回消息类型：音乐
@@ -70,6 +77,11 @@ public class MessageUtil {
 	 */
 	public static final String REQ_MESSAGE_TYPE_VIDEO = "video";
 	
+	/**
+	 * 请求消息类型：小视频
+	 */
+	public static final String REQ_MESSAGE_TYPE_SHORTVIDEO = "shortvideo";
+	
 
 	/**
 	 * 请求消息类型：音频
@@ -104,12 +116,13 @@ public class MessageUtil {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public static Map<String, String> parseXml(HttpServletRequest request) throws Exception {
+	public static Map<String, String> parseXml(String request) throws Exception {
 		// 将解析结果存储在HashMap中
 		Map<String, String> map = new HashMap<String, String>();
 
 		// 从request中取得输入流
-		InputStream inputStream = request.getInputStream();
+		//InputStream inputStream = request.getInputStream();
+		InputStream inputStream=new ByteArrayInputStream(request.getBytes());
 		// 读取输入流
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(inputStream);
@@ -135,10 +148,11 @@ public class MessageUtil {
 	 * @param textMessage 文本消息对象
 	 * @return xml
 	 */
-	public static String textMessageToXml(TextMessage textMessage) {
-		xstream.alias("xml", textMessage.getClass());
-		return xstream.toXML(textMessage);
+	public static String textMessageToXml(TextRespMsg textRespMsg) {
+		xstream.alias("xml", textRespMsg.getClass());
+		return xstream.toXML(textRespMsg);
 	}
+	
 
 	/**
 	 * 音乐消息对象转换成xml
@@ -165,8 +179,8 @@ public class MessageUtil {
 
 	/**
 	 * 扩展xstream，使其支持CDATA块
-	 * 
-	 * @date 2013-05-19
+	 * 用于扩展节点数据按照<ToUserName><![CDATA[toUser]]></ToUserName>,中间加了CDATA
+	 * @date 2015-9-3
 	 */
 	private static XStream xstream = new XStream(new XppDriver() {
 		public HierarchicalStreamWriter createWriter(Writer out) {

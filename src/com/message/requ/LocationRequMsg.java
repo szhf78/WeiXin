@@ -7,7 +7,7 @@ package com.message.requ;
  * @date 2015-9-7
  * @version
  */
-public class LocationMessage extends BaseMessage {
+public class LocationRequMsg extends BaseRequMsg {
 	// 地理位置维度
 	private String Location_X;
 	// 地理位置经度

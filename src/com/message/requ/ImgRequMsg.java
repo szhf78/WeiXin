@@ -7,7 +7,7 @@ package com.message.requ;
  * @version 1.0
  *
  */
-public class ImageMessage extends BaseMessage {
+public class ImgRequMsg extends BaseRequMsg {
 	
 	// 图片链接
 	private String PicUrl;

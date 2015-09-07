@@ -15,7 +15,7 @@ import java.util.Arrays;
  */
 public class ValidationUtil {
 	// 与接口配置信息中的Token要一致
-	private static String token = "szhf1978";
+	//private static String token = "szhf1978";
 
 	/**
 	 * 验证签名
@@ -27,7 +27,7 @@ public class ValidationUtil {
 	 */
 	public static boolean checkSignature(String signature, String timestamp,
 			String nonce) {
-		String[] arr = new String[] { token, timestamp, nonce };
+		String[] arr = new String[] { Parameter.token, timestamp, nonce };
 		// 将token、timestamp、nonce三个参数进行字典序排序
 		Arrays.sort(arr);
 		StringBuilder content = new StringBuilder();

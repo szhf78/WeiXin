@@ -7,7 +7,7 @@ package com.message.requ;
  * @date 2015-9-7
  * @version 1.0
  */
-public class VoiceMessage extends BaseMessage {
+public class VoiceRequMsg extends BaseRequMsg {
 		// 语音消息媒体id
 		private String MediaId;
 		// 语音格式

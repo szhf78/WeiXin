@@ -7,7 +7,7 @@ package com.message.requ;
  * @version 1.0
  *
  */
-public class TextMessage extends BaseMessage {
+public class TextRequMsg extends BaseRequMsg {
 	
 	private String Content;//文本消息内容
 	

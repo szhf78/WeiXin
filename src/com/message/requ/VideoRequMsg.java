@@ -6,7 +6,7 @@ package com.message.requ;
  * @date 2015-9-7
  * @version
  */
-public class VideoMessage extends BaseMessage {
+public class VideoRequMsg extends BaseRequMsg {
 	//视频消息媒体id
 	private String MediaId;
 	

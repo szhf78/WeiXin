@@ -7,7 +7,7 @@ package com.message.requ;
  * @date 2015-9-7
  * @version
  */
-public class LinkMessage extends BaseMessage {
+public class LinkRequMsg extends BaseRequMsg {
 	// 消息标题
 	private String Title;
 	// 消息描述
