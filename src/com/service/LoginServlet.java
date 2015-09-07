@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.message.resp.TextMessage;
+import com.message.requ.TextMessage;
 import com.util.MessageUtil;
 import com.util.ValidationUtil;
 
@@ -104,8 +104,11 @@ public class LoginServlet extends HttpServlet {
 			textMsg.setCreateTime(new Date().getTime());
 			textMsg.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
 			
-			if(MsgType.equals(MessageUtil.RESP_MESSAGE_TYPE_TEXT)){
-				respContent="欢迎来到地狱天堂";
+			if(MsgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)){
+				respContent="文本消息，欢迎来到地狱天堂";
+			}
+			if(MsgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)){
+				respContent="您发送的是图片消息";
 			}
 			textMsg.setContent(respContent);
 			

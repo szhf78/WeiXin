@@ -1,4 +1,4 @@
-package com.message.resp;
+package com.message.requ;
 
 /**
  * 基础消息类
@@ -13,6 +13,7 @@ public class BaseMessage {
 	private String FromUserName;//发送方帐号（一个OpenID）
 	private long CreateTime;//消息创建时间 （整型）
 	private String MsgType;//消息类型
+	private long MsgId;//消息id，64位整型
 	
 	public String getToUserName() {
 		return ToUserName;
@@ -39,5 +40,11 @@ public class BaseMessage {
 		MsgType = msgType;
 	}
 	
+	public long getMsgId() {
+		return MsgId;
+	}
+	public void setMsgId(long msgId) {
+		MsgId = msgId;
+	}
 
 }
