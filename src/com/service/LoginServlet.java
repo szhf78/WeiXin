@@ -103,11 +103,15 @@ public class LoginServlet extends HttpServlet {
 				
 		String encryptMsg="";
 		try {
+			//加密回复消息
 			encryptMsg=wxcpt.encryptMsg(respMessage, timeStamp, nonce);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		System.out.println("encryptMsg="+encryptMsg);
+		
+		//响应消息
 		PrintWriter out=response.getWriter();
 		out.print(encryptMsg);
 		out.close();
