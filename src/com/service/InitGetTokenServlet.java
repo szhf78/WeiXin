@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.util.Parameter;
 import com.util.TokenThread;
 import com.util.WeixinUtil;
 
@@ -27,8 +28,11 @@ public class InitGetTokenServlet extends HttpServlet {
 	
 	public void init() throws ServletException {
 		//获取web.xml中配置的参数
-		TokenThread.appId=getInitParameter("appId");
-		TokenThread.appSecret=getInitParameter("appSecret");
+		//TokenThread.appId=getInitParameter("appId");
+		//TokenThread.appSecret=getInitParameter("appSecret");
+		
+		TokenThread.appId=Parameter.appId;
+		TokenThread.appSecret=Parameter.appSecret;
 		
 		log.info("微信api appid:{}",TokenThread.appId);
 		log.info("微信 api appsecret:{}",TokenThread.appSecret);

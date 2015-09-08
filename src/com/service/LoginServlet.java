@@ -68,8 +68,20 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		//msgAndEvent(request, response);
 		
+		msgAndEvent(request, response);
+		
+		//encryptMsgAndEvent(request, response);
+	}
+	
+	/**
+	 * 加密接收消息和事件
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	private void encryptMsgAndEvent(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
 		//接收参数微信加密签名，时间戳，随机数
 		String msgSignature=request.getParameter("msg_signature");
 		String timeStamp = request.getParameter("timestamp");
@@ -132,10 +144,8 @@ public class LoginServlet extends HttpServlet {
 
 		// 1,获得微信签名的加密字符串
 		String signature = request.getParameter("signature");
-
 		// 2,获得时间戳
 		String timestamp = request.getParameter("timestamp");
-
 		// 3,获得随机数
 		String nonce = request.getParameter("nonce");
 
@@ -147,7 +157,7 @@ public class LoginServlet extends HttpServlet {
 			// 接收并解析来自用户的XML数据包中的内容
 			Map<String, String> reqMap = null;
 			try {
-				//reqMap = MessageUtil.parseXml(request);
+				reqMap = MessageUtil.parseXml(request);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

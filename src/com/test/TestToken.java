@@ -2,6 +2,7 @@ package com.test;
 
 import net.sf.json.JSONObject;
 
+import com.util.Parameter;
 import com.util.WeixinUtil;
 import com.vo.Token;
 
@@ -9,9 +10,9 @@ public class TestToken {
 	
 	public static void main(String[] args) {
 		//应用ID
-		String appId="wx0a6e11ce9b1a3417";
+		String appId=Parameter.appId;
 		//应用密钥 
-		String appSecret="c654fc6285e19f821cf4539d0ac6ba24";
+		String appSecret=Parameter.appSecret;
 		Token token=WeixinUtil.getToken(appId, appSecret);
 		
 		System.out.println(token.getAccessToken());

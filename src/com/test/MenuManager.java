@@ -41,6 +41,10 @@ public class MenuManager {
 		btn22.setType("view");
 		btn22.setUrl("http://www.duowan.com/");
 		
+		ClickButton btn31=new ClickButton();
+		btn31.setName("女汉子");
+		btn31.setType("click");
+		btn31.setKey("hanzhi");
 		
 		
 		ComplexButton mainBtn1=new ComplexButton();
@@ -53,7 +57,7 @@ public class MenuManager {
 		
 		ComplexButton mainBtn3=new ComplexButton();
 		mainBtn3.setName("其它");
-		mainBtn3.setSub_button(new Button[]{});
+		mainBtn3.setSub_button(new Button[]{btn31});
 		
 		
 		Menu menu=new Menu();
@@ -62,9 +66,9 @@ public class MenuManager {
 	}
 	
 	public static void main(String[] args){
-		String appId=Parameter.appId;
+		String appId=Parameter.appId;//测试公众号
 		
-		String appSecret=Parameter.appSecret;
+		String appSecret=Parameter.appSecret;//测试公众号
 		
 		Token token=WeixinUtil.getToken(appId, appSecret);
 		
