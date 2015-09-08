@@ -16,9 +16,9 @@ public class TokenThread implements Runnable {
 	private static Logger log=LoggerFactory.getLogger(TokenThread.class);
 	
 	//第三方用户唯一凭证
-	public static String appId="wx0a6e11ce9b1a3417";
+	public static String appId=Parameter.appId;
 	
-	public static String appSecret="c654fc6285e19f821cf4539d0ac6ba24";
+	public static String appSecret=Parameter.appSecret;
 	
 	public static Token accessToken=null;
 	
@@ -26,7 +26,7 @@ public class TokenThread implements Runnable {
 	public void run() {
 		while(true){
 			try {
-				accessToken=WeixinUtil.getToken(appId, appSecret);
+				accessToken=WeixinUtil.getToken(Parameter.appId, Parameter.appSecret);
 				if(null!=accessToken){
 					log.info("获取access_token成功，有效时长{}秒 token:{}",accessToken.getExpiresIn(),accessToken.getAccessToken());
 					//休眠7000秒

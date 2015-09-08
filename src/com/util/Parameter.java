@@ -8,5 +8,7 @@ public class Parameter {
 	//应用ID
 	public static String appId="wx0a6e11ce9b1a3417";
 	
+	public static String appSecret="c654fc6285e19f821cf4539d0ac6ba24";
+	
 
 }
