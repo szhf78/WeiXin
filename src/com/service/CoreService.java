@@ -83,7 +83,7 @@ public class CoreService {
             // 设置文本消息的内容
  			textMessage.setContent(respContent);
  			// 将文本消息对象转换成xml
-            respXml = MessageUtil.textMessageToXml(textMessage);
+            respXml = MessageUtil.messageToXml(textMessage);
             
         } catch (Exception e) {  
             e.printStackTrace();  

@@ -13,6 +13,8 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.message.resp.Article;
+import com.message.resp.NewsRespMsg;
 import com.message.resp.TextRespMsg;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
@@ -180,7 +182,7 @@ public class MessageUtil {
 	 * @param textMessage 文本消息对象
 	 * @return xml
 	 */
-	public static String textMessageToXml(TextRespMsg textRespMsg) {
+	public static String messageToXml(TextRespMsg textRespMsg) {
 		xstream.alias("xml", textRespMsg.getClass());
 		return xstream.toXML(textRespMsg);
 	}
@@ -203,11 +205,11 @@ public class MessageUtil {
 	 * @param newsMessage 图文消息对象
 	 * @return xml
 	 */
-	/*public static String newsMessageToXml(NewsMessage newsMessage) {
-		xstream.alias("xml", newsMessage.getClass());
+	public static String messageToXml(NewsRespMsg NewsRespMsg) {
+		xstream.alias("xml", NewsRespMsg.getClass());
 		xstream.alias("item", new Article().getClass());
-		return xstream.toXML(newsMessage);
-	}*/
+		return xstream.toXML(NewsRespMsg);
+	}
 
 	/**
 	 * 扩展xstream，使其支持CDATA块

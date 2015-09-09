@@ -21,30 +21,31 @@ public class MenuManager {
 	 * @return
 	 */
 	private static Menu getMenu(){
-		ClickButton btn11=new ClickButton();
-		btn11.setName("美女");
-		btn11.setType("click");
-		btn11.setKey("pretty");
+		ViewButton btn11=new ViewButton();
+		btn11.setName("帅哥");
+		btn11.setType("view");
+		btn11.setUrl("http://www.duowan.com/");
 		
-		ClickButton btn12=new ClickButton();
-		btn12.setName("女汉子");
-		btn12.setType("click");
-		btn12.setKey("hanzhi");
+		ViewButton btn12=new ViewButton();
+		btn12.setName("屌丝");
+		btn12.setType("view");
+		btn12.setUrl("http://www.duowan.com/");
 		
-		ViewButton btn21=new ViewButton();
-		btn21.setName("帅哥");
-		btn21.setType("view");
-		btn21.setUrl("http://www.duowan.com/");
+		ClickButton btn21=new ClickButton();
+		btn21.setName("美女");
+		btn21.setType("click");
+		btn21.setKey("pretty");
 		
-		ViewButton btn22=new ViewButton();
-		btn22.setName("屌丝");
-		btn22.setType("view");
-		btn22.setUrl("http://www.duowan.com/");
+		ClickButton btn22=new ClickButton();
+		btn22.setName("女汉子");
+		btn22.setType("click");
+		btn22.setKey("hanzhi");
+		
 		
 		ClickButton btn31=new ClickButton();
-		btn31.setName("女汉子");
+		btn31.setName("娃娃");
 		btn31.setType("click");
-		btn31.setKey("hanzhi");
+		btn31.setKey("wawa");
 		
 		
 		ComplexButton mainBtn1=new ComplexButton();
