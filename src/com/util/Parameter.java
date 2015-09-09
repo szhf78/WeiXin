@@ -10,7 +10,7 @@ public class Parameter {
 	//public static String appSecret = "c654fc6285e19f821cf4539d0ac6ba24";
 
 	// 测试ID
-	public static String appId = "wx0a6e11ce9b1a3417";
-	public static String appSecret = "c654fc6285e19f821cf4539d0ac6ba24";
+	public static String appId = "wxb8d35f2618ff0b55";
+	public static String appSecret = "5262f0f4eee828c01f7e21e7eb357429";
 
 }

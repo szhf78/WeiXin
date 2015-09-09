@@ -72,10 +72,21 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-
-		msgAndEvent(request, response);
-
-		// encryptMsgAndEvent(request, response);
+		
+		final String ENCRYPT_TYPE_RAW = "raw";
+		final String ENCRYPT_TYPE_AES = "aes";
+		String encrypt_type=request.getParameter("encrypt_type");
+		
+		System.out.println("encrypt_type="+encrypt_type);
+		
+		if(ENCRYPT_TYPE_RAW.equals(encrypt_type)||encrypt_type==null||encrypt_type.length()==0){
+			//不解密
+			msgAndEvent(request, response);
+		}
+		if(encrypt_type.equals(ENCRYPT_TYPE_AES)){
+			//aes解密
+			encryptMsgAndEvent(request, response);
+		}
 	}
 
 	/**
@@ -254,10 +265,17 @@ public class LoginServlet extends HttpServlet {
 						Article article = new Article();
 						article.setTitle("指南针科技");
 						article.setDescription("上海指南针环境科技有限公司");
-						article.setPicUrl("http://www.compass-inf.com.cn/images/banner_dtxt.png");
-
+						article.setPicUrl("http://www.compass-inf.com.cn/UpImage/Relate/244X63/20150309155754.png");
+						article.setUrl("http://www.compass-inf.com.cn/");
 						List<Article> articleList = new ArrayList<Article>();
 						articleList.add(article);
+						
+						Article article2 = new Article();
+						article2.setTitle("指南针科技2");
+						article2.setDescription("上海指南针环境科技有限公司2");
+						article2.setPicUrl("http://www.compass-inf.com.cn/UpImage/Relate/244X63/20150309155754.png");
+						article2.setUrl("http://www.compass-inf.com.cn/");
+						articleList.add(article2);
 
 						// 创建图文消息
 						NewsRespMsg newsRespMsg = new NewsRespMsg();
