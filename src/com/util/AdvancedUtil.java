@@ -246,7 +246,8 @@ public class AdvancedUtil {
 			filePath = savePath + ticket + ".jpg";
 
 			// 将微信服务器返回的输入流写入文件
-			BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+			BufferedInputStream bis = new BufferedInputStream(
+					conn.getInputStream());
 			FileOutputStream fos = new FileOutputStream(new File(filePath));
 			byte[] buf = new byte[8096];
 			int size = 0;
@@ -259,11 +260,47 @@ public class AdvancedUtil {
 			conn.disconnect();
 			log.info("根据ticket换取二维码成功,filePath=" + filePath);
 		} catch (Exception e) {
-			filePath=null;
-			log.error("根据ticket换取二维码失败:{}",e);
+			filePath = null;
+			log.error("根据ticket换取二维码失败:{}", e);
 		}
 
 		return filePath;
+	}
+
+	/**
+	 * 长链接转短链接接口
+	 * 
+	 * @param accessToken
+	 * @return
+	 */
+	public static String longUrl2ShortUrl(String accessToken,String longUrl) {
+
+		String shortUrl = null;
+		// 拼接请求地址
+		String requestUrl = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN";
+		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
+
+		// 需要提交的json数据
+		String jsonMsg = "{\"action\":\"long2short\",\"long_url\":\"%s\"}";
+
+		// 创建临时的带参二维码
+		JSONObject jsonObject = WeixinUtil.httpsRequest(requestUrl, "POST",
+				String.format(jsonMsg, longUrl));
+
+		if (null != jsonObject) {
+			try {
+				shortUrl = jsonObject.getString("short_url");
+
+				log.info("长链接转短链接成功shortUrl:{} ", shortUrl);
+			} catch (Exception e) {
+				int errorCode = jsonObject.getInt("errcode");
+				String errorMsg = jsonObject.getString("errmsg");
+				log.error("长链接转短链接失败 errcode:{} errmsg:{}", errorCode,
+						errorMsg);
+			}
+		}
+		
+		return shortUrl;
 	}
 
 	public static void main(String args[]) {
@@ -271,42 +308,46 @@ public class AdvancedUtil {
 				Parameter.appSecret).getAccessToken();
 
 		System.out.println("accessToken=" + accessToken);
-		/*// 获取关注者列表
-		UserList weixingUserList = getUserList(accessToken, null);
-		System.out.println("总关注用户数:" + weixingUserList.getTotal());
-		System.out.println("本次获取用户数:" + weixingUserList.getCount());
-		System.out.println("OpenID列表"
-				+ weixingUserList.getOpenIdList().toString());
-		System.out.println("next_openid:" + weixingUserList.getNext_openid());
-
-		// 获取某一用户的信息
-		UserInfo user = getUserInfo(accessToken, "oyb8KxJqM5AUtJVwi-X33qUC7eu0");
-		System.out.println("OpenID:" + user.getOpenId());
-		System.out.println("关注状态:" + user.getSubscribe());
-		System.out.println("关注时间:" + user.getSubscribe_time());
-		System.out.println("昵称:" + user.getNickname());
-		System.out.println("性别:" + user.getSex());
-		System.out.println("国家:" + user.getCountry());
-		System.out.println("省份:" + user.getProvince());
-		System.out.println("城市:" + user.getCity());
-		System.out.println("语言:" + user.getLanguage());
-		System.out.println("头像" + user.getHeadimgurl());*/
-		
 		/*
-		//创建临时带参二维码
-		WeixinQRCode tempQRCode=createTemporaryQRCode(accessToken, 1800, 1000);
-		String ticket=tempQRCode.getTicket();
-		System.out.println("tempQRCode.getTicket()="+tempQRCode.getTicket());
-		System.out.println("expire_seconds="+tempQRCode.getExpire_seconds());*/
+		 * // 获取关注者列表 UserList weixingUserList = getUserList(accessToken, null);
+		 * System.out.println("总关注用户数:" + weixingUserList.getTotal());
+		 * System.out.println("本次获取用户数:" + weixingUserList.getCount());
+		 * System.out.println("OpenID列表" +
+		 * weixingUserList.getOpenIdList().toString());
+		 * System.out.println("next_openid:" +
+		 * weixingUserList.getNext_openid());
+		 * 
+		 * // 获取某一用户的信息 UserInfo user = getUserInfo(accessToken,
+		 * "oyb8KxJqM5AUtJVwi-X33qUC7eu0"); System.out.println("OpenID:" +
+		 * user.getOpenId()); System.out.println("关注状态:" + user.getSubscribe());
+		 * System.out.println("关注时间:" + user.getSubscribe_time());
+		 * System.out.println("昵称:" + user.getNickname());
+		 * System.out.println("性别:" + user.getSex()); System.out.println("国家:" +
+		 * user.getCountry()); System.out.println("省份:" + user.getProvince());
+		 * System.out.println("城市:" + user.getCity()); System.out.println("语言:"
+		 * + user.getLanguage()); System.out.println("头像" +
+		 * user.getHeadimgurl());
+		 */
+
+		/*
+		 * //创建临时带参二维码 WeixinQRCode
+		 * tempQRCode=createTemporaryQRCode(accessToken, 1800, 1000); String
+		 * ticket=tempQRCode.getTicket();
+		 * System.out.println("tempQRCode.getTicket()="+tempQRCode.getTicket());
+		 * System.out.println("expire_seconds="+tempQRCode.getExpire_seconds());
+		 */
+
+		// /创建永久临时带参二维码
+		String ticket = createPermanentQRCode(accessToken, 100);
+		String savePath = "f:/download";
+		String fileSavePath = getQRCode(ticket, savePath);
+		System.out.println("fileSavePath=" + fileSavePath);
 		
-		///创建永久临时带参二维码
-		String ticket=createPermanentQRCode(accessToken, 100);
-		String savePath="f:/download";
-		String fileSavePath=getQRCode(ticket, savePath);
-		System.out.println("fileSavePath="+fileSavePath);
-		
-		
-		
+		//长链接转短链接
+		String longUrl="https://www.baidu.com/s?wd=github%20for%20windows%20compare怎么显示出来&rsv_spt=1&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_t=0d30qH78ph38IB0ymjX8aUgLgj9kHc0hGOMEW66NP97AHV4deOsaeYwCUsNoPxjyBSoL&oq=拉勾&inputT=16864&rsv_pq=e6e040d7000361be&rsv_sug3=24&rsv_sug1=13&sug=github%20for%20windows退回到指定版本&rsv_n=1&rsv_sug2=0&rsv_sug4=16864";
+		String shortUrl=longUrl2ShortUrl(accessToken, longUrl);
+		System.out.println("shortUrl="+shortUrl);
+
 	}
 
 }
