@@ -29,7 +29,7 @@ public class MenuManager {
 		ViewButton btn12=new ViewButton();
 		btn12.setName("屌丝");
 		btn12.setType("view");
-		btn12.setUrl("http://www.duowan.com/");
+		btn12.setUrl("http://121.43.108.115/aboutus/aboutus.jsp");
 		
 		ClickButton btn21=new ClickButton();
 		btn21.setName("美女");

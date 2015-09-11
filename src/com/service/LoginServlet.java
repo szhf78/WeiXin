@@ -274,7 +274,7 @@ public class LoginServlet extends HttpServlet {
 						article2.setTitle("指南针科技2");
 						article2.setDescription("上海指南针环境科技有限公司2");
 						article2.setPicUrl("http://www.compass-inf.com.cn/UpImage/Relate/244X63/20150309155754.png");
-						article2.setUrl("http://www.compass-inf.com.cn/");
+						article2.setUrl("http://121.43.108.115/aboutus/aboutus.jsp");
 						articleList.add(article2);
 
 						// 创建图文消息

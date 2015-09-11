@@ -15,6 +15,7 @@ import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sun.org.apache.commons.logging.Log;
 import com.vo.UserInfo;
 import com.vo.UserList;
 import com.vo.WeixinQRCode;
@@ -135,7 +136,7 @@ public class AdvancedUtil {
 	 * @param accessToken
 	 *            　接口访问凭证
 	 * @param expireSeconde
-	 *            　二给码有时间，单位为秒，最大不超过604800
+	 *            　二给码有时间，单位为秒，最大不超过1800
 	 * @param sceneId
 	 *            　场景ID
 	 * @return WeixinQRCode
@@ -146,7 +147,7 @@ public class AdvancedUtil {
 		// 拼接请求地址
 		String requestUrl = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=TOKEN";
 		requestUrl = requestUrl.replace("TOKEN", accessToken);
-
+		 
 		// 需要提交的json数据
 		String jsonMsg = "{\"expire_seconds\": %d, \"action_name\": \"QR_SCENE\", \"action_info\": {\"scene\": {\"scene_id\": %d}}}";
 
@@ -273,7 +274,7 @@ public class AdvancedUtil {
 	 * @param accessToken
 	 * @return
 	 */
-	public static String longUrl2ShortUrl(String accessToken,String longUrl) {
+	public static String longUrl2ShortUrl(String accessToken, String longUrl) {
 
 		String shortUrl = null;
 		// 拼接请求地址
@@ -295,11 +296,10 @@ public class AdvancedUtil {
 			} catch (Exception e) {
 				int errorCode = jsonObject.getInt("errcode");
 				String errorMsg = jsonObject.getString("errmsg");
-				log.error("长链接转短链接失败 errcode:{} errmsg:{}", errorCode,
-						errorMsg);
+				log.error("长链接转短链接失败 errcode:{} errmsg:{}", errorCode, errorMsg);
 			}
 		}
-		
+
 		return shortUrl;
 	}
 
@@ -337,16 +337,16 @@ public class AdvancedUtil {
 		 * System.out.println("expire_seconds="+tempQRCode.getExpire_seconds());
 		 */
 
-		// /创建永久临时带参二维码
+		// /创建永久带参二维码
 		String ticket = createPermanentQRCode(accessToken, 100);
 		String savePath = "f:/download";
 		String fileSavePath = getQRCode(ticket, savePath);
 		System.out.println("fileSavePath=" + fileSavePath);
-		
-		//长链接转短链接
-		String longUrl="https://www.baidu.com/s?wd=github%20for%20windows%20compare怎么显示出来&rsv_spt=1&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_t=0d30qH78ph38IB0ymjX8aUgLgj9kHc0hGOMEW66NP97AHV4deOsaeYwCUsNoPxjyBSoL&oq=拉勾&inputT=16864&rsv_pq=e6e040d7000361be&rsv_sug3=24&rsv_sug1=13&sug=github%20for%20windows退回到指定版本&rsv_n=1&rsv_sug2=0&rsv_sug4=16864";
-		String shortUrl=longUrl2ShortUrl(accessToken, longUrl);
-		System.out.println("shortUrl="+shortUrl);
+
+		// 长链接转短链接
+		String longUrl = "https://www.baidu.com/s?wd=github%20for%20windows%20compare怎么显示出来&rsv_spt=1&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_t=0d30qH78ph38IB0ymjX8aUgLgj9kHc0hGOMEW66NP97AHV4deOsaeYwCUsNoPxjyBSoL&oq=拉勾&inputT=16864&rsv_pq=e6e040d7000361be&rsv_sug3=24&rsv_sug1=13&sug=github%20for%20windows退回到指定版本&rsv_n=1&rsv_sug2=0&rsv_sug4=16864";
+		String shortUrl = longUrl2ShortUrl(accessToken, longUrl);
+		System.out.println("shortUrl=" + shortUrl);
 
 	}
 
