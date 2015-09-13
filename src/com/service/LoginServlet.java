@@ -83,7 +83,7 @@ public class LoginServlet extends HttpServlet {
 			//不解密
 			msgAndEvent(request, response);
 		}
-		if(encrypt_type.equals(ENCRYPT_TYPE_AES)){
+		if(ENCRYPT_TYPE_AES.equals(encrypt_type)){
 			//aes解密
 			encryptMsgAndEvent(request, response);
 		}
@@ -291,7 +291,7 @@ public class LoginServlet extends HttpServlet {
 						// 将对象转成Xml
 						respXml = MessageUtil.messageToXml(newsRespMsg);
 					} else if (eventKey.equals("hanzhi")) {
-						textMsg.setContent("指南针科技官网 \n http://www.compass-inf.com.cn/");
+						textMsg.setContent("指南针科技官网 \n http://www.heavenorhell.cn/aboutus/aboutus.jsp");
 						respXml = MessageUtil.messageToXml(textMsg);
 					}
 				}

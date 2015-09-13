@@ -302,6 +302,20 @@ public class AdvancedUtil {
 
 		return shortUrl;
 	}
+	
+	
+	/**
+	 * 客服接口发送文本消息
+	 * @param openId
+	 * @param content
+	 * @return
+	 */
+	public static String makeTextCustomMessage(String openId,String content){
+		//对消息内容中的双引号进行转义
+		content=content.replace("\"", "\\\"");
+		String jsonMsg="{\"touser\":\"%s\",\"msgtype\":\"text\",\"text\":{\"content\":\"%s\"}}";
+		return String.format(jsonMsg,openId, content);
+	}
 
 	public static void main(String args[]) {
 		String accessToken = WeixinUtil.getToken(Parameter.appId,
